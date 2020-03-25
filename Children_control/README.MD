@@ -8,6 +8,8 @@
 - - - Start the network
 
 ![](https://github.com/nu11secur1ty/Windows/blob/master/Children_control/screen/3.PNG)
+ - - - After execution:
+ ![](https://github.com/nu11secur1ty/Windows/blob/master/Children_control/screen/enable.PNG)
 
 ```
 run as Administrator

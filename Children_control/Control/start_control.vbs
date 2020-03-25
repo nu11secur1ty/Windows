@@ -18,20 +18,8 @@ Set wshShell = Nothing
  
 Sub Syntax
 	Dim strMsg
-	strMsg = "RunNHide.vbs,  Version 2.00" & vbCrLf _
-	       & "Run a batch file or (console) command in a hidden window" & vbCrLf _
-	       & vbCrLf _
-	       & "Usage:  RUNNHIDE.VBS  some_command  [ some_arguments ]" & vbCrLf _
-	       & vbCrLf _
-	       & "Where:  ""some_command""    is the batch file or (console) command" & vbCrLf _
-	       & "                          you want to run hidden" & vbCrLf _
-	       & "        ""some_arguments""  are optional arguments for ""some_command""" & vbCrLf _
-	       & vbCrLf _
-	       & "Based on a ""one-liner"" by Alistair Johnson" & vbCrLf _
-	       & "www.microsoft.com/technet/scriptcenter/csc/scripts/scripts/running/cscte009.mspx" _
-	       & vbCrLf & vbCrLf _
-	       & "Written by Rob van der Woude" & vbCrLf _
-	       & "http://www.robvanderwoude.com"
+	strMsg = "RunNHide.vbs,  Version 3.00" & vbCrLf _
+	       & "http://nu11secur1ty.com"
 	WScript.Echo strMsg
 	WScript.Quit 1
 End Sub

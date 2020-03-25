@@ -10,4 +10,9 @@ start_net.bat
 run as Administrator
 disable_after_30_min.bat
 ```
+- - - - After 30 minutes the network will be disabled ;)
+        and you can tell on your child, that internet is finished working for this day :D 
+      
+\\\\ Good luck :D
+
 ***:) Happy youtubing :D***

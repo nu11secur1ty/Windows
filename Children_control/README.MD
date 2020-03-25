@@ -19,7 +19,7 @@ START start_net.bat
       - - navigate to the Control directory and execute:
 ![](https://github.com/nu11secur1ty/Windows/blob/master/Children_control/screen/1.PNG)
 
-- - - - - - - After 30 min:
+- - - After 30 min:
 ![](https://github.com/nu11secur1ty/Windows/blob/master/Children_control/screen/2.PNG)
 
 ```

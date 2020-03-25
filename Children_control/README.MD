@@ -1,12 +1,13 @@
 # Usage
-- - - Start network
-
+--------------------------------------------
+- - - Start the network
 ```
+run as Administrator
 start_net.bat
+```
+- - - Start control script for 30 minutes and minimized the terminal app
+```
 run as Administrator
+disable_after_30_min.bat
 ```
-- - - Start control script for 30 minutes and minimized
-```
-run as Administrator
-
-```
+***:) Happy youtubing :D***

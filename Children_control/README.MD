@@ -6,6 +6,9 @@
 
 --------------------------------------------
 - - - Start the network
+
+![](https://github.com/nu11secur1ty/Windows/blob/master/Children_control/screen/3.PNG)
+
 ```
 run as Administrator
 START start_net.bat

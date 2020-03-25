@@ -5,7 +5,8 @@
 run as Administrator
 START start_net.bat
 ```
-- - - Start control script for 30 minutes and minimized the terminal app
+- - - Start control script for 30 minutes.
+      - - navigate to Control directory and execute:
 ```
 run as Administrator
 START /B disable_after_30_min.bat

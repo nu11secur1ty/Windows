@@ -29,6 +29,10 @@ start_control.vbs control_network_30_minutes.bat
 - - - - After 30 minutes the network will be disabled ;)
         and you can tell on your child, that internet is finished working for this day :D 
       
+- - -  Automation starter: Run as Administrator
+```cmd
+start starter.bat
+```
 \\\\ Good luck :D
 
 ***:) Happy youtubing :D***

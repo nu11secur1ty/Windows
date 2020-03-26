@@ -1,12 +1,12 @@
 # Usage
 
-- - - Start control manualy: Run as Administrator
+- - - Start control manually: Run as Administrator
 ```cmd
 start_control.vbs control_network_30_minutes.bat
 ```
 - - - After 30 minutes network will be disabled;
 
-- - -  Start authomation: Run as Administrator
+- - -  Automation starter: Run as Administrator
 ```cmd
 start starter.bat
 ```

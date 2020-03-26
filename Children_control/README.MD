@@ -30,6 +30,7 @@ start_control.vbs control_network_30_minutes.bat
         and you can tell on your child, that internet is finished working for this day :D 
       
 - - -  Automation starter: Run as Administrator
+    - from Windows/Children_control/Control/ 
 ```cmd
 start starter.bat
 ```

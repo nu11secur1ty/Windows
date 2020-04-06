@@ -1,4 +1,5 @@
 # Usage
+- - - IMPORTANT: Run this program as `admin` user NOT as `Administrator`!!!
 ```cmd
 start stupidwin.bat
 ```

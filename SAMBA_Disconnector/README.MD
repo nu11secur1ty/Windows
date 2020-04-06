@@ -22,6 +22,6 @@ Please enter your SMB share connect:0.0.0.0 _your_IP
 
 - - - Then the program will find and distroy all SMB connections to this server.
 
-**WARNING: The computer will restart after this operation, this will be necessary to take the new setup... welcome to bozindows**
+**WARNING: Your computer will be restarted after this operation, this will be necessary to take the new setup... welcome to bozindows**
 
 

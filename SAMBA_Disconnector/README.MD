@@ -13,5 +13,10 @@ start stupidwin.bat
 1
 ```
 - - - Give your `SMB` server `IP`
-![]()
+![](https://github.com/nu11secur1ty/Windows/blob/master/SAMBA_Disconnector/screen/3.PNG)
+
+```cmd
+Please enter your SMB share connect:0.0.0.0 _your_IP
+```
+
 

@@ -1,5 +1,6 @@
 # Usage
 - - - IMPORTANT: Run this program as an `admin` user NOT as `Administrator`!!!
+      
       just double-clicking on `bat` file...
 
 ![](https://github.com/nu11secur1ty/Windows/blob/master/SAMBA_Disconnector/screen/2.PNG)

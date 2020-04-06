@@ -25,7 +25,7 @@ Please enter your SMB share connect:0.0.0.0 _your_IP
 ```
 - Press Enter to continue...
 
-- - - Then the program will find and distroy all SMB connections to this server.
+- - - Then this program will find and destroy all your connections to this SMB server on your stupid Windows OS.
 
 **WARNING: Your computer will be restarted after this operation, this will be necessary to take the new setup... welcome to bozindows**
 

@@ -23,6 +23,7 @@ start stupidwin.bat
 ```cmd
 Please enter your SMB share connect:0.0.0.0 _your_IP
 ```
+- Press Enter to continue...
 
 - - - Then the program will find and distroy all SMB connections to this server.
 

@@ -18,6 +18,8 @@ start stupidwin.bat
 
 ![](https://github.com/nu11secur1ty/Windows/blob/master/SAMBA_Disconnector/screen/3.PNG)
 
+- - - For example:
+
 ```cmd
 Please enter your SMB share connect:0.0.0.0 _your_IP
 ```

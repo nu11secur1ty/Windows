@@ -3,7 +3,7 @@ Run on PowerShell as Administrator
 
 - - - Enable execution of scripts on your system.
 ```cmd
-Set-ExecutionPolicy RemoteSigned
+cmd /c echo y | powershell "read-host" Set-ExecutionPolicy RemoteSigned
 ```
 - - - Uninstall kortana
 ```cmd

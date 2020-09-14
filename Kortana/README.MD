@@ -16,5 +16,5 @@ cmd /c echo y | powershell "read-host" Set-ExecutionPolicy RemoteSigned
 
 - - - After you finish with installation of kortakill, you can turnbacjk the policy
 ```cmd
-Set-ExecutionPolicy Restricted
+cmd /c echo y | powershell "read-host" Set-ExecutionPolicy Restricted
 ```

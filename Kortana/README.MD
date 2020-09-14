@@ -1,7 +1,7 @@
 # kortakill
 Run on PowerShell as Administrator
 
-- - - Enable execution of scripts on this system.
+- - - Enable execution of scripts on your system.
 ```cmd
 Set-ExecutionPolicy RemoteSigned
 ```

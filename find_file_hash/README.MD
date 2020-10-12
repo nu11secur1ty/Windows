@@ -11,6 +11,9 @@
  ```cmd
  Get-FileHash 'C:\Program Files (x86)\Notepad++\notepad++.exe' | Format-List
  ```
+ - - - Output
+ ![](https://github.com/nu11secur1ty/Windows/blob/master/find_file_hash/screen/hash.PNG)
+ 
  
  3. Save HASH 
  - Open Notepad, and save your hash, for example: 

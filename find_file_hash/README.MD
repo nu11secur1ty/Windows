@@ -1,4 +1,4 @@
- # For example I will check the hash key of notepad++.exe which is alredy instaled
+ # For example I will check the hash key of notepad.exe which is already installed
  1. - Open PowerShell as Administrator
  - install the software `get-filehas`
  

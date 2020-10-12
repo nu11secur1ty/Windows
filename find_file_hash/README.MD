@@ -3,7 +3,7 @@
  - install the software `get-filehas`
  
  ```cmd
- get-filehash
+ get-help get-filehash
  ```
  - Choice `Y`
  

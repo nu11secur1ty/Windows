@@ -1,7 +1,7 @@
 # Uninstall key
 https://answers.microsoft.com/en-us/windows/forum/all/how-to-disconnect-from-organization-activation/d6279f50-249b-4f7d-9614-aa0d8d4aa12a
 
-# the command for uninstalling your current key in cmd 
+# Command, for uninstalling your current key in cmd 
 ```
 slmgr -upk
 ```

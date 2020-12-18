@@ -6,8 +6,7 @@ slmgr -upk
 
 
 #  Windows 10 pro
-```
-VK7JG-NPHTM-C97JM-9MPGT-3V66T 
+``` 
 VK7JG-NPHTM-C97JM-9MPGT-3V66T - generic
 ```
 # Windows core

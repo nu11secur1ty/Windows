@@ -42,7 +42,7 @@
 #
 #.Notes 
 #  Author: Jason Fossen (http://www.sans.org/windows-security/)  
-#  Developer: Ventsislav Varbanovski (System Administartor - Infrastructure && Penetration Tester Engineer [https://www.nu11secur1ty.com/])
+#  Developer: Ventsislav Varbanovski (System Administartor - Infrastructure && Penetration Testing Engineer [https://www.nu11secur1ty.com/])
 # Version: Vinahost release
 # Updated: 15.Aug.2017
 #   LEGAL: PUBLIC DOMAIN.  SCRIPT PROVIDED "AS IS" WITH NO WARRANTIES OR GUARANTEES OF 

@@ -1,0 +1,9 @@
+# Block from CIDR
+.\import-firewall-blocklist.ps1 -InputFile .\germany.txt
+
+# Delete Rule
+.\import-firewall-blocklist.ps1 -InputFile .\germany.txt -deleteonly
+
+# Reset and delete
+Remove-NetFirewallRule -All
+(New-Object -ComObject HNetCfg.FwPolicy2).RestoreLocalFirewallDefaults()

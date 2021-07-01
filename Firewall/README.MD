@@ -1,8 +1,10 @@
 ## Block traffic
 ![](https://github.com/nu11secur1ty/Windows/blob/master/Firewall/docs/wall.jpg)
 
-- Usage
-- 
+- Usage:
+## Open PowerShell as Administrator
+![](https://github.com/nu11secur1ty/Windows/blob/master/Firewall/docs/powershell.PNG)
+
 ## Preparing
 ```powershel
 .\control-deploy.ps1

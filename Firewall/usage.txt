@@ -1,8 +1,8 @@
 # Block from CIDR
-.\import-firewall-blocklist.ps1 -InputFile .\germany.txt
+.\import-firewall-blocklist.ps1 -InputFile .\blacklist.txt
 
 # Delete Rule
-.\import-firewall-blocklist.ps1 -InputFile .\germany.txt -deleteonly
+.\import-firewall-blocklist.ps1 -InputFile .\blacklist.txt -deleteonly
 
 # Reset and delete
 Remove-NetFirewallRule -All

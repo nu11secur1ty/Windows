@@ -15,7 +15,7 @@
 ```powershell
 .\import-firewall-blocklist.ps1 -InputFile .\blacklist.txt
 # Optional:
- .\import-firewall-blocklist.ps1 -InputFile .\Countries\your_countri_config.txt
+.\import-firewall-blocklist.ps1 -InputFile .\Countries\your_countri_config.txt
 ```
 ## Delete Rule
 ```powershell

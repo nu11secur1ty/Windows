@@ -2,7 +2,11 @@
 ![](https://github.com/nu11secur1ty/Windows/blob/master/Firewall/docs/wall.jpg)
 
 - Usage
--   
+- 
+## Preparing
+```powershel
+.\control-deploy.ps1
+```
 ## Block from CIDR
 ```powershell
 .\import-firewall-blocklist.ps1 -InputFile .\blacklist.txt

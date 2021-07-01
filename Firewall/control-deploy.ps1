@@ -1,2 +1,3 @@
 Set-ExecutionPolicy RemoteSigned
 Set-ExecutionPolicy unrestricted
+Set-ExecutionPolicy restricted

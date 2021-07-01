@@ -1,13 +1,5 @@
 #####################################################
-#   ____ _                 _  ____            __ _   
-#  / ___| | ___  _   _  __| |/ ___|_ __ __ _ / _| |_ 
-# | |   | |/ _ \| | | |/ _` | |   | '__/ _` | |_| __|
-# | |___| | (_) | |_| | (_| | |___| | | (_| |  _| |_ 
-#  \____|_|\___/ \__,_|\__,_|\____|_|  \__,_|_|  \__|
-#
-# Website: https://cloudcraft.info
-# Facebook: https://www.facebook.com/CloudCraftTeam
-# Youtube: https://www.youtube.com/channel/UCe6hnAk19MgZIdhm4i11Mlg
+# nu11secur1ty
 #
 #.Parameter Zone
 #	 The country code which you want to block.

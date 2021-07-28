@@ -3,7 +3,7 @@ import time
 from datetime import datetime as dt
 
 sites_to_block = [
-    'www.facebook.com',  'facebook.com',  
+    'www.facebook.com', 'facebook.com',  
     'www.youtube.com', 'youtube.com',
     'www.gmail.com', 'gmail.com'
 ]

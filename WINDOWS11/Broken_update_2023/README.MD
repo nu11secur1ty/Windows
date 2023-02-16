@@ -3,7 +3,7 @@
 - - Run the script like an administrator.
 ```cmd
 debelui.bat
-#Do you want to continue this operation? (Y/N) [N]: Y
+# Do you want to continue this operation? (Y/N) [N]: Y
 ```
 - - Then check for updates again!
 

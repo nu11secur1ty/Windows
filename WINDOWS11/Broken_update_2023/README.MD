@@ -1,6 +1,6 @@
 ## Broken_update_2023
 - Usage 
-- - Run the script 
+- - Run the script like an administrator and just press `Enter`!
 ```cmd
 debelui.bat
 ```

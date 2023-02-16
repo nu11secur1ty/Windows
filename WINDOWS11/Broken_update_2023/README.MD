@@ -1,8 +1,9 @@
 ## Broken_update_2023
 - Usage 
-- - Run the script like an administrator and just press `Enter`!
+- - Run the script like an administrator.
 ```cmd
 debelui.bat
+#Do you want to continue this operation? (Y/N) [N]: Y
 ```
 - - Then check for updates again!
 

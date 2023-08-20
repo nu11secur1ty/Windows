@@ -1,5 +1,5 @@
 ### Repair corrupted files
-- Run as administratorr
+- Run as administrator
 ```cmd
 DISM.exe /Online /Cleanup-image /Restorehealth
 ```

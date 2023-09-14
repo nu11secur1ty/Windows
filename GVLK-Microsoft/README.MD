@@ -3,6 +3,10 @@
 ## Windows Server 2016
 ## Operating system edition	KMS Client Product Key
 
+## Install the key
+```cmd
+slmgr /ipk YOUR-KEY-HERE-VERSION-OS
+```
 ```cmd
 Windows Server 2016 Datacenter	CB7KF-BWN84-R7R2Y-793K2-8XDDG
 Windows Server 2016 Standard	WC2BQ-8NRM3-FDDYY-2BFGV-KHKQY

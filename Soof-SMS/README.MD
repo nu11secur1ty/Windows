@@ -9,3 +9,9 @@
 pip install -r requirements.txt
 ```
 
+### Usage:
+- Just run the program =)
+
+```python
+python nozzle.py
+```

@@ -4,8 +4,8 @@
 import requests
 import os
 import colorama
-
 from colorama import Fore, Back, Style
+
 print(Fore.RED + 'WARNING: Only one SMS for one number daily and WITHOUT adding URL address, for security reasons!\n')
 print(Style.RESET_ALL)
 

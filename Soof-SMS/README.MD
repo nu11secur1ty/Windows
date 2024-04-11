@@ -15,3 +15,6 @@ pip install -r requirements.txt
 ```python
 python nozzle.py
 ```
+### OS's support
+
+- OS* :D

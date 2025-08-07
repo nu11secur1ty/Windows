@@ -27,6 +27,20 @@ A PowerShell script that generates a real-time + historical **login activity rep
 ## 🚀 How to Use
 
 ### 1. **Download the Script**
+```
+logarithm-nu11secur1ty.ps1
+```
+---
 
-Save the script as:
+### 2. **Run in PowerShell**
 
+> ⚠️ Must be run as **Administrator**
+
+```powershell
+.\logarithm-nu11secur1ty.ps1
+
+# 📋 Requirements:
+- ✅ Windows (Pro/Enterprise recommended)
+- ✅ PowerShell 5.1+ or PowerShell Core
+- ✅ Access to Windows Security Event Logs
+- ✅ quser available in system path

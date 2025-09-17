@@ -4,6 +4,7 @@
 
 .DESCRIPTION
   Collects OS, CPU, RAM, GPU, disks, network, BIOS, motherboard info.
+  Detects Windows release (like 24H1, 23H2) based on build number.
   Saves report automatically to every user's Desktop as SystemReport.txt.
 #>
 
@@ -32,8 +33,21 @@ Safe-Get {
     $ci.ComputerName = $env:COMPUTERNAME
     $ci.Domain = $cs.Domain
     $ci.SerialNumber = (Get-CimInstance Win32_BIOS -ErrorAction SilentlyContinue).SerialNumber
+
+    # --- Map build number to Windows release ---
+    $release = switch ($ci.BuildNumber) {
+        {$_ -ge 23125} {"24H1"}
+        {$_ -ge 20348} {"23H2"}
+        {$_ -ge 19045} {"22H2"}
+        {$_ -ge 19044} {"21H2"}
+        {$_ -ge 19043} {"21H1"}
+        {$_ -ge 19042} {"20H2"}
+        {$_ -ge 19041} {"2004"}
+        default {"Unknown"}
+    }
+
     Out "Product: $($ci.ProductName)"
-    Out "Version: $($ci.Version)    Build: $($ci.BuildNumber)    Architecture: $($ci.OSArchitecture)"
+    Out "Version: $($ci.Version)    Build: $($ci.BuildNumber)    Release: $release    Architecture: $($ci.OSArchitecture)"
     Out "Install Date: $($ci.InstallDate)    Last Boot: $($ci.LastBoot)"
     Out "Computer Name: $($ci.ComputerName)    Domain: $($ci.Domain)"
     Out "System Serial: $($ci.SerialNumber)"

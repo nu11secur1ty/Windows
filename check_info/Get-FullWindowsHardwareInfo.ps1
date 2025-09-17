@@ -34,15 +34,15 @@ Safe-Get {
     $ci.Domain = $cs.Domain
     $ci.SerialNumber = (Get-CimInstance Win32_BIOS -ErrorAction SilentlyContinue).SerialNumber
 
-    # --- Map build number to Windows release ---
+    # --- Map build number to Windows release correctly ---
     $release = switch ($ci.BuildNumber) {
-        {$_ -ge 23125} {"24H1"}
-        {$_ -ge 20348} {"23H2"}
-        {$_ -ge 19045} {"22H2"}
-        {$_ -ge 19044} {"21H2"}
-        {$_ -ge 19043} {"21H1"}
-        {$_ -ge 19042} {"20H2"}
-        {$_ -ge 19041} {"2004"}
+        {$_ -ge 23125} {"24H1"; break}
+        {$_ -ge 20348} {"23H2"; break}
+        {$_ -ge 19045} {"22H2"; break}
+        {$_ -ge 19044} {"21H2"; break}
+        {$_ -ge 19043} {"21H1"; break}
+        {$_ -ge 19042} {"20H2"; break}
+        {$_ -ge 19041} {"2004"; break}
         default {"Unknown"}
     }
 

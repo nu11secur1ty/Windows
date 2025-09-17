@@ -1,4 +1,4 @@
-# check info online
+# Windows check info online
 # IMPORTANT:
 RUN AS ADMINISTRATOR!
 - usage with PowerShell:

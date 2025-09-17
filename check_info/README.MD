@@ -1,11 +1,8 @@
 # check info
 # Note:
 RUN AS ADMINISTRATOR
+- usage with powershell:
 ```
-iex ((iwr "https://raw.githubusercontent.com/nu11secur1ty/Windows/refs/heads/master/check_info/Get-FullWindowsHardwareInfo.ps1").Content) -OutputFile "C:\Temp\SystemReport.txt"
-
-```
-# Current directory
-```
-iex ((iwr "https://raw.githubusercontent.com/nu11secur1ty/Windows/refs/heads/master/check_info/Get-FullWindowsHardwareInfo.ps1").Content)
+1. Set-ExecutionPolicy Bypass -Scope Process -Force
+1. iex (iwr 'https://raw.githubusercontent.com/nu11secur1ty/Windows/master/check_info/Get-FullWindowsHardwareInfo.ps1' -UseBasicParsing | Select-Object -ExpandProperty Content)
 ```

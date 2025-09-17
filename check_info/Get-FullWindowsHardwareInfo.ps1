@@ -5,6 +5,7 @@
 .DESCRIPTION
   Collects OS, CPU, RAM, GPU, disks, network, BIOS, motherboard info.
   Detects Windows release (like 24H1, 23H2) based on build number.
+  Detects if system is enrolled in Windows Insider Program.
   Saves report automatically to every user's Desktop as SystemReport.txt.
 #>
 
@@ -46,8 +47,17 @@ Safe-Get {
         default {"Unknown"}
     }
 
+    # --- Detect Insider / Preview build ---
+    $insider = "No"
+    try {
+        $flightId = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\Applicability" -ErrorAction SilentlyContinue
+        if ($flightId.ReleaseType -or $flightId.BranchName) {
+            $insider = "Yes"
+        }
+    } catch {}
+
     Out "Product: $($ci.ProductName)"
-    Out "Version: $($ci.Version)    Build: $($ci.BuildNumber)    Release: $release    Architecture: $($ci.OSArchitecture)"
+    Out "Version: $($ci.Version)    Build: $($ci.BuildNumber)    Release: $release    Insider: $insider    Architecture: $($ci.OSArchitecture)"
     Out "Install Date: $($ci.InstallDate)    Last Boot: $($ci.LastBoot)"
     Out "Computer Name: $($ci.ComputerName)    Domain: $($ci.Domain)"
     Out "System Serial: $($ci.SerialNumber)"

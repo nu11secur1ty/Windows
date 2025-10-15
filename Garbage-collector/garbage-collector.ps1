@@ -44,8 +44,63 @@ Clear-Folder "$env:LOCALAPPDATA\Microsoft\Windows\Explorer"
 Clear-Folder "C:\Windows\Logs"
 
 # === BROWSER CACHE (SAFE) ===
-Clear-Folder "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Cache"
-Clear-Folder "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache"
+Write-Host "Cleaning browser caches (safe)..."
+
+# Helper function for Chrome-like browsers
+function Clear-ChromeLikeCache($basePath) {
+    if (Test-Path $basePath) {
+        Get-ChildItem -Path $basePath -Directory | ForEach-Object {
+            $profile = $_.FullName
+            $cacheFolders = @("Cache", "GPUCache", "Code Cache", "Service Worker\CacheStorage", "Service Worker\ScriptCache")
+            foreach ($folder in $cacheFolders) {
+                $full = Join-Path $profile $folder
+                if (Test-Path $full) {
+                    Clear-Folder $full
+                }
+            }
+        }
+    }
+}
+
+# --- Chrome ---
+Clear-ChromeLikeCache "$env:LOCALAPPDATA\Google\Chrome\User Data"
+
+# --- Edge ---
+Clear-ChromeLikeCache "$env:LOCALAPPDATA\Microsoft\Edge\User Data"
+
+# --- Brave ---
+Clear-ChromeLikeCache "$env:LOCALAPPDATA\BraveSoftware\Brave-Browser\User Data"
+
+# --- Vivaldi ---
+Clear-ChromeLikeCache "$env:LOCALAPPDATA\Vivaldi\User Data"
+
+# --- Opera ---
+if (Test-Path "$env:LOCALAPPDATA\Opera Software\Opera Stable\Cache") {
+    Clear-Folder "$env:LOCALAPPDATA\Opera Software\Opera Stable\Cache"
+}
+if (Test-Path "$env:APPDATA\Opera Software\Opera Stable\Cache") {
+    Clear-Folder "$env:APPDATA\Opera Software\Opera Stable\Cache"
+}
+if (Test-Path "$env:LOCALAPPDATA\Opera Software\Opera GX Stable\Cache") {
+    Clear-Folder "$env:LOCALAPPDATA\Opera Software\Opera GX Stable\Cache"
+}
+
+# --- Chromium generic ---
+Clear-ChromeLikeCache "$env:LOCALAPPDATA\Chromium\User Data"
+
+# --- Mozilla Firefox ---
+$ffProfiles = "$env:APPDATA\Mozilla\Firefox\Profiles"
+if (Test-Path $ffProfiles) {
+    Get-ChildItem -Path $ffProfiles -Directory | ForEach-Object {
+        $profile = $_.FullName
+        foreach ($folder in @("cache2","startupCache")) {
+            $full = Join-Path $profile $folder
+            if (Test-Path $full) {
+                Clear-Folder $full
+            }
+        }
+    }
+}
 
 # === WINDOWS.OLD REMOVAL ===
 $windowsOld = "C:\Windows.old"

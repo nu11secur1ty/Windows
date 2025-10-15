@@ -2,6 +2,7 @@
 :: Safe Aggressive Windows Cleaner Script
 :: WARNING: Deletes unnecessary files but preserves browser logins
 :: by nu11secur1ty
+
 :: === USER TEMP FILES ===
 ECHO Cleaning user temp folder...
 IF EXIST "%USERPROFILE%\AppData\Local\Temp" (
@@ -55,12 +56,103 @@ IF EXIST "C:\Windows\Logs" (
 
 :: === BROWSER CACHE (SAFE) ===
 ECHO Cleaning browser caches (safe)...
-:: Edge / Chrome
-IF EXIST "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Cache" (
-    del /s /f /q "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Cache\*.*" >nul 2>&1
+
+:: --- Google Chrome ---
+IF EXIST "%LOCALAPPDATA%\Google\Chrome\User Data" (
+    FOR /D %%G IN ("%LOCALAPPDATA%\Google\Chrome\User Data\*") DO (
+        IF EXIST "%%G\Cache" (
+            del /s /f /q "%%G\Cache\*.*" >nul 2>&1
+        )
+        IF EXIST "%%G\GPUCache" (
+            del /s /f /q "%%G\GPUCache\*.*" >nul 2>&1
+        )
+        IF EXIST "%%G\Code Cache" (
+            del /s /f /q "%%G\Code Cache\*.*" >nul 2>&1
+        )
+    )
 )
-IF EXIST "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Cache" (
-    del /s /f /q "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Cache\*.*" >nul 2>&1
+
+:: --- Microsoft Edge ---
+IF EXIST "%LOCALAPPDATA%\Microsoft\Edge\User Data" (
+    FOR /D %%G IN ("%LOCALAPPDATA%\Microsoft\Edge\User Data\*") DO (
+        IF EXIST "%%G\Cache" (
+            del /s /f /q "%%G\Cache\*.*" >nul 2>&1
+        )
+        IF EXIST "%%G\GPUCache" (
+            del /s /f /q "%%G\GPUCache\*.*" >nul 2>&1
+        )
+        IF EXIST "%%G\Code Cache" (
+            del /s /f /q "%%G\Code Cache\*.*" >nul 2>&1
+        )
+    )
+)
+
+:: --- Mozilla Firefox ---
+IF EXIST "%APPDATA%\Mozilla\Firefox\Profiles" (
+    FOR /D %%G IN ("%APPDATA%\Mozilla\Firefox\Profiles\*") DO (
+        IF EXIST "%%G\cache2" (
+            del /s /f /q "%%G\cache2\*.*" >nul 2>&1
+        )
+        IF EXIST "%%G\startupCache" (
+            del /s /f /q "%%G\startupCache\*.*" >nul 2>&1
+        )
+    )
+)
+
+:: --- Brave Browser ---
+IF EXIST "%LOCALAPPDATA%\BraveSoftware\Brave-Browser\User Data" (
+    FOR /D %%G IN ("%LOCALAPPDATA%\BraveSoftware\Brave-Browser\User Data\*") DO (
+        IF EXIST "%%G\Cache" (
+            del /s /f /q "%%G\Cache\*.*" >nul 2>&1
+        )
+        IF EXIST "%%G\GPUCache" (
+            del /s /f /q "%%G\GPUCache\*.*" >nul 2>&1
+        )
+        IF EXIST "%%G\Code Cache" (
+            del /s /f /q "%%G\Code Cache\*.*" >nul 2>&1
+        )
+    )
+)
+
+:: --- Vivaldi ---
+IF EXIST "%LOCALAPPDATA%\Vivaldi\User Data" (
+    FOR /D %%G IN ("%LOCALAPPDATA%\Vivaldi\User Data\*") DO (
+        IF EXIST "%%G\Cache" (
+            del /s /f /q "%%G\Cache\*.*" >nul 2>&1
+        )
+        IF EXIST "%%G\GPUCache" (
+            del /s /f /q "%%G\GPUCache\*.*" >nul 2>&1
+        )
+        IF EXIST "%%G\Code Cache" (
+            del /s /f /q "%%G\Code Cache\*.*" >nul 2>&1
+        )
+    )
+)
+
+:: --- Opera ---
+IF EXIST "%LOCALAPPDATA%\Opera Software\Opera Stable\Cache" (
+    del /s /f /q "%LOCALAPPDATA%\Opera Software\Opera Stable\Cache\*.*" >nul 2>&1
+)
+IF EXIST "%APPDATA%\Opera Software\Opera Stable\Cache" (
+    del /s /f /q "%APPDATA%\Opera Software\Opera Stable\Cache\*.*" >nul 2>&1
+)
+IF EXIST "%LOCALAPPDATA%\Opera Software\Opera GX Stable\Cache" (
+    del /s /f /q "%LOCALAPPDATA%\Opera Software\Opera GX Stable\Cache\*.*" >nul 2>&1
+)
+
+:: --- Chromium Generic ---
+IF EXIST "%LOCALAPPDATA%\Chromium\User Data" (
+    FOR /D %%G IN ("%LOCALAPPDATA%\Chromium\User Data\*") DO (
+        IF EXIST "%%G\Cache" (
+            del /s /f /q "%%G\Cache\*.*" >nul 2>&1
+        )
+        IF EXIST "%%G\GPUCache" (
+            del /s /f /q "%%G\GPUCache\*.*" >nul 2>&1
+        )
+        IF EXIST "%%G\Code Cache" (
+            del /s /f /q "%%G\Code Cache\*.*" >nul 2>&1
+        )
+    )
 )
 
 :: === WINDOWS.OLD REMOVAL ===

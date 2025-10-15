@@ -1,6 +1,6 @@
 # Safe Aggressive Windows Cleaner Script (PowerShell)
 # WARNING: Deletes unnecessary files but preserves browser logins
-
+# by nu11secur1ty
 # Function to safely delete a folder's contents
 function Clear-Folder($path) {
     if (Test-Path $path) {

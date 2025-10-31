@@ -224,3 +224,5 @@ git remote set-url origin git@github-accountA:accountA/repo.git
 ## License & Attribution
 
 This document is public domain / CC0-like: copy, paste, modify, and share it. It is intentionally generic and contains example placeholders — replace `accountA`, `accountB`, and file names with your own values when following it.
+
+***by nu11secur1ty***

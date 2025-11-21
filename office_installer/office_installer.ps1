@@ -1,34 +1,47 @@
-# Windows 11 Office Installer using Microsoft ODT
-# Run as Administrator
+# ============================
+# Office Auto Installer (Fixed)
+# ============================
 
-Write-Host "Downloading Office Deployment Tool..." -ForegroundColor Cyan
+Write-Host "Downloading Office Deployment Tool..."
 
-$odtUrl = "https://download.microsoft.com/download/2/2/3/2230A6A1-5229-4D59-9F9A-7F67A75B8B2A/officedeploymenttool_16425-20210.exe"
-$odtExe = "$env:TEMP\ODT.exe"
+$odtUrl = "https://download.microsoft.com/download/6c1eeb25-cf8b-41d9-8d0d-cc1dbc032140/officedeploymenttool_18526-20146.exe"
 
+$temp = [IO.Path]::GetTempPath()
+$odtExe = Join-Path $temp "odt-setup.exe"
+$odtFolder = Join-Path $temp "ODT"
+
+# Download ODT
 Invoke-WebRequest -Uri $odtUrl -OutFile $odtExe
 
-Write-Host "Extracting ODT..." -ForegroundColor Cyan
-$odtFolder = "$env:TEMP\ODT"
+# Prepare folder
+if (-Not (Test-Path $odtFolder)) {
+    New-Item $odtFolder -ItemType Directory | Out-Null
+}
+
+# Extract ODT
+Write-Host "Extracting ODT..."
 Start-Process -FilePath $odtExe -ArgumentList "/quiet", "/extract:$odtFolder" -Wait
 
-# Create configuration file for Microsoft 365 Apps (Office 365)
+# Create config XML
+$configFile = Join-Path $odtFolder "configuration.xml"
+
 $configXml = @"
 <Configuration>
   <Add OfficeClientEdition="64" Channel="Current">
     <Product ID="O365ProPlusRetail">
-      <Language ID="en-us"/>
+      <Language ID="en-us" />
     </Product>
   </Add>
-  <Display Level="None" AcceptEULA="TRUE"/>
-  <Updates Enabled="TRUE"/>
+  <Display Level="None" AcceptEULA="TRUE" />
 </Configuration>
 "@
 
-$configFile = "$odtFolder\config.xml"
 $configXml | Out-File -FilePath $configFile -Encoding UTF8
 
-Write-Host "Installing Microsoft Office for Windows 11..." -ForegroundColor Yellow
-Start-Process -FilePath "$odtFolder\setup.exe" -ArgumentList "/configure config.xml" -Wait
+# Install Office
+$setupExe = Join-Path $odtFolder "setup.exe"
 
-Write-Host "Office installation complete!" -ForegroundColor Green
+Write-Host "Installing Microsoft Office..."
+Start-Process -FilePath $setupExe -ArgumentList "/configure", $configFile -Wait
+
+Write-Host "Office installation complete!"

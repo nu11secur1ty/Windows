@@ -5,14 +5,31 @@
 
 Write-Host "Restoring Micky Mouse default settings..." -ForegroundColor Yellow
 
-# 1. Remove the Auto-Reboot block from Registry
-$registryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU"
-if (Test-Path $registryPath) {
-    Remove-ItemProperty -Path $registryPath -Name "NoAutoRebootWithLoggedOnUsers" -ErrorAction SilentlyContinue
-    Write-Host "[+] Registry: Auto-Reboot block removed." -ForegroundColor Green
+# 1. Изчистване на регистрите (Премахваме нашите забрани)
+$regPaths = @(
+    "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU",
+    "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update"
+)
+
+foreach ($path in $regPaths) {
+    if (Test-Path $path) {
+        Remove-ItemProperty -Path $path -Name "NoAutoRebootWithLoggedOnUsers" -ErrorAction SilentlyContinue
+        Remove-ItemProperty -Path $path -Name "AUOptions" -ErrorAction SilentlyContinue
+        Write-Host "[+] Registry: Restrictions removed from $path" -ForegroundColor Green
+    }
 }
 
-# 2. Re-enable tasks in Task Scheduler
+# 2. Отключване на файла на задачата (Връщане на правата)
+# Това е критично, за да може Windows изобщо да "види" задачата отново
+$taskFile = "$env:windir\System32\Tasks\Microsoft\Windows\UpdateOrchestrator\Reboot"
+if (Test-Path $taskFile) {
+    # Връщаме собствеността на SYSTEM и нулираме правата
+    icacls $taskFile /setowner "NT AUTHORITY\SYSTEM" /c /t | Out-Null
+    icacls $taskFile /reset | Out-Null
+    Write-Host "[+] File System: Permissions reset for Reboot task file." -ForegroundColor Green
+}
+
+# 3. Връщане на задачите в Task Scheduler
 $tasks = @(
     "\Microsoft\Windows\UpdateOrchestrator\Reboot",
     "\Microsoft\Windows\UpdateOrchestrator\Reboot_AC",
@@ -21,23 +38,25 @@ $tasks = @(
 
 foreach ($taskPath in $tasks) {
     try {
-        Enable-ScheduledTask -TaskPath (Split-Path $taskPath -Parent) -TaskName (Split-Path $taskPath -Leaf) -ErrorAction SilentlyContinue
+        Enable-ScheduledTask -TaskName (Split-Path $taskPath -Leaf) -TaskPath (Split-Path $taskPath -Parent) -ErrorAction SilentlyContinue
         Write-Host "[+] Task Scheduler: Re-enabled $taskPath" -ForegroundColor Green
     } catch {
-        Write-Host "[-] Task Scheduler: Could not find $taskPath to enable." -ForegroundColor Gray
+        Write-Host "[-] Task Scheduler: Could not enable $taskPath" -ForegroundColor Gray
     }
 }
 
-# 3. Restore Permissions to the Reboot task file (if they were changed)
-$rebootFile = "$env:windir\System32\Tasks\Microsoft\Windows\UpdateOrchestrator\Reboot"
-if (Test-Path $rebootFile) {
-    icacls $rebootFile /reset
-    Write-Host "[+] File System: Permissions reset for Reboot task file." -ForegroundColor Green
-}
-
-# 4. Force apply the policies back to default
-gpupdate /force
+# 4. Форсиране на политиките
+gpupdate /force | Out-Null
 
 Write-Host "==========================================================" -ForegroundColor Yellow
 Write-Host "RESTORE COMPLETE! Windows is back to default behavior." -ForegroundColor White
 Write-Host "==========================================================" -ForegroundColor Yellow
+
+# --- ПРОВЕРКА НА СТАТУСА ---
+Write-Host "[!] FINAL VERIFICATION:" -ForegroundColor Cyan
+$verify = Get-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -ErrorAction SilentlyContinue
+if ($null -eq $verify.NoAutoRebootWithLoggedOnUsers) {
+    Write-Host "[CLEAN] NoAutoReboot restriction is GONE." -ForegroundColor Green
+} else {
+    Write-Host "[STILL THERE] Restriction persists. Manual check needed." -ForegroundColor Red
+}

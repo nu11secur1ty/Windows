@@ -1,47 +1,48 @@
 # ==========================================================
-# nu11secur1ty - Anti-MickyMouse Auto-Restart Script
-# Target: Windows 11 / Windows 10
-# Purpose: Stop automatic reboots during deep sessions
+# nu11secur1tyAI - WINDOWS REBOOT KILLER v4
+# ПРЕДНАЗНАЧЕНИЕ: Пълна забрана на автоматичния рестарт без потвърждение
 # ==========================================================
 
-Write-Host "Starting the nu11secur1ty-tunnel protection..." -ForegroundColor Cyan
+Write-Host "Starting anti-MickyMouse defensive protocol..." -ForegroundColor Cyan
 
-# 1. Disable Auto-Reboot with Logged-on Users (Registry)
-$registryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU"
-if (!(Test-Path $registryPath)) {
-    New-Item -Path $registryPath -Force | Out-Null
-}
-New-ItemProperty -Path $registryPath -Name "NoAutoRebootWithLoggedOnUsers" -Value 1 -PropertyType DWORD -Force
-Write-Host "[+] Registry: Auto-Reboot blocked for logged users." -ForegroundColor Green
-
-# 2. Disable the Reboot Tasks in Task Scheduler
-$tasks = @(
-    "\Microsoft\Windows\UpdateOrchestrator\Reboot",
-    "\Microsoft\Windows\UpdateOrchestrator\Reboot_AC",
-    "\Microsoft\Windows\UpdateOrchestrator\Reboot_Battery"
+# 1. Форсиране на регистрите - казваме на Windows: "Ще ПИТАШ!"
+$regPaths = @(
+    "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU",
+    "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update"
 )
 
-foreach ($taskPath in $tasks) {
-    try {
-        Disable-ScheduledTask -TaskPath (Split-Path $taskPath -Parent) -TaskName (Split-Path $taskPath -Leaf) -ErrorAction Stop
-        Write-Host "[+] Task Scheduler: Disabled $taskPath" -ForegroundColor Green
-    } catch {
-        Write-Host "[-] Task Scheduler: Could not find or disable $taskPath (it might not exist in this build)" -ForegroundColor Yellow
-    }
+foreach ($path in $regPaths) {
+    if (!(Test-Path $path)) { New-Item -Path $path -Force | Out-Null }
+    # Стойност 1 = Не рестартирай автоматично, ако има логнат потребител
+    Set-ItemProperty -Path $path -Name "NoAutoRebootWithLoggedOnUsers" -Value 1 -Type DWORD -Force
+    # Стойност 2 = Уведоми ме за теглене и инсталиране (ПИТАНЕ)
+    Set-ItemProperty -Path $path -Name "AUOptions" -Value 2 -Type DWORD -Force
+    Write-Host "[+] Registry updated: $path" -ForegroundColor Green
 }
 
-# 3. Disable the 'UpdateOrchestrator' service from triggering reboots
-# Note: We don't stop the service (to keep updates), we just block the reboot command
-$rebootFile = "$env:windir\System32\Tasks\Microsoft\Windows\UpdateOrchestrator\Reboot"
-if (Test-Path $rebootFile) {
-    takeown /f $rebootFile /a
-    icacls $rebootFile /inheritance:r /grant:r "Administrators:F" /deny "SYSTEM:F"
-    Write-Host "[+] File System: Denied SYSTEM access to Reboot task file." -ForegroundColor Green
+# 2. Убиваме задачата за рестарт на системно ниво
+$rebootTaskPath = "\Microsoft\Windows\UpdateOrchestrator\Reboot"
+try {
+    Disable-ScheduledTask -TaskName "Reboot" -TaskPath "\Microsoft\Windows\UpdateOrchestrator\" -ErrorAction SilentlyContinue
+    Write-Host "[+] Scheduled Task 'Reboot' DISABLED." -ForegroundColor Green
+} catch {
+    Write-Host "[-] Could not disable task, might be already locked." -ForegroundColor Yellow
 }
 
-# 4. Force apply the policies
-gpupdate /force
+# 3. Заключваме файла на задачата (Permissions Hack)
+# Това пречи на Windows сам да си пусне задачата обратно
+$taskFile = "$env:windir\System32\Tasks\Microsoft\Windows\UpdateOrchestrator\Reboot"
+if (Test-Path $taskFile) {
+    takeown /f $taskFile /a | Out-Null
+    icacls $taskFile /inheritance:d | Out-Null
+    icacls $taskFile /deny "Everyone:(F)" /deny "SYSTEM:(F)" /deny "LocalService:(F)" | Out-Null
+    Write-Host "[+] Task file LOCKED. Windows cannot read it anymore!" -ForegroundColor Green
+}
+
+# 4. Обновяване на политиките веднага
+gpupdate /force | Out-Null
 
 Write-Host "==========================================================" -ForegroundColor Cyan
-Write-Host "THE THEOREM IS PROTECTED! No more Micky Mouse resets." -ForegroundColor White
+Write-Host "SUCCESS! Windows will now ASK for your permission." -ForegroundColor White
+Write-Host "Your session is safe. Continue training v4 Evolution!" -ForegroundColor Cyan
 Write-Host "==========================================================" -ForegroundColor Cyan

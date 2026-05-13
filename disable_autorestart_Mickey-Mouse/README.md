@@ -4,6 +4,8 @@
 
 ```
 irm https://raw.githubusercontent.com/nu11secur1ty/Windows/refs/heads/master/disable_autorestart_Mickey-Mouse/disable_autorestart_Mickey-Mouse.win | iex
+```
+```
 iex (curl.exe -s --doh-url https://1.1.1.1/dns-query https://raw.githubusercontent.com/nu11secur1ty/Windows/refs/heads/master/disable_autorestart_Mickey-Mouse/disable_autorestart_Mickey-Mouse.win | Out-String)
 ```
 
@@ -13,5 +15,7 @@ iex (curl.exe -s --doh-url https://1.1.1.1/dns-query https://raw.githubuserconte
 
 ```
 irm https://raw.githubusercontent.com/nu11secur1ty/Windows/refs/heads/master/disable_autorestart_Mickey-Mouse/turn_back_Mickey-Mouse_autoreset.win | iex
+```
+```
 iex (curl.exe -s --doh-url https://1.1.1.1/dns-query https://raw.githubusercontent.com/nu11secur1ty/Windows/refs/heads/master/disable_autorestart_Mickey-Mouse/turn_back_Mickey-Mouse_autoreset.win | Out-String)
 ```

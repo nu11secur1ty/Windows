@@ -46,3 +46,19 @@ Write-Host "==========================================================" -Foregro
 Write-Host "SUCCESS! Windows will now ASK for your permission." -ForegroundColor White
 Write-Host "Your session is safe. Continue training v4 Evolution!" -ForegroundColor Cyan
 Write-Host "==========================================================" -ForegroundColor Cyan
+
+# --- ДОБАВЕНА ПРОВЕРКА ОТ nu11secur1tyAI ---
+Write-Host "`n[!] FINAL VERIFICATION STATUS:" -ForegroundColor Yellow
+$verify = Get-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -ErrorAction SilentlyContinue
+if ($verify.NoAutoRebootWithLoggedOnUsers -eq 1) { 
+    Write-Host "[OK] NoAutoReboot is set to 1 (PROTECTED)" -ForegroundColor Green 
+} else { 
+    Write-Host "[FAIL] NoAutoReboot NOT detected!" -ForegroundColor Red 
+}
+
+if ($verify.AUOptions -eq 2) { 
+    Write-Host "[OK] AUOptions is set to 2 (NOTIFY MODE)" -ForegroundColor Green 
+} else { 
+    Write-Host "[FAIL] AUOptions NOT detected!" -ForegroundColor Red 
+}
+Write-Host "==========================================================" -ForegroundColor Cyan

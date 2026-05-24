@@ -1,11 +1,11 @@
 # ==========================================================
 # nu11secur1ty - WINDOWS REBOOT KILLER v4
-# ПРЕДНАЗНАЧЕНИЕ: Пълна забрана на автоматичния рестарт без потвърждение
+# PURPOSE: Complete prohibition of automatic restart without confirmation
 # ==========================================================
 
 Write-Host "Starting anti-MickyMouse defensive protocol..." -ForegroundColor Cyan
 
-# 1. Форсиране на регистрите - казваме на Windows: "Ще ПИТАШ!"
+# 1. Forcing the registries - we tell Windows: "I will ASK!""
 $regPaths = @(
     "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU",
     "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update"
@@ -13,14 +13,14 @@ $regPaths = @(
 
 foreach ($path in $regPaths) {
     if (!(Test-Path $path)) { New-Item -Path $path -Force | Out-Null }
-    # Стойност 1 = Не рестартирай автоматично, ако има логнат потребител
+    # Value 1 = Do not restart automatically if there is a logged-in user
     Set-ItemProperty -Path $path -Name "NoAutoRebootWithLoggedOnUsers" -Value 1 -Type DWORD -Force
-    # Стойност 2 = Уведоми ме за теглене и инсталиране (ПИТАНЕ)
+    # Value 2 = Notify me of download and installation (ASK)
     Set-ItemProperty -Path $path -Name "AUOptions" -Value 2 -Type DWORD -Force
     Write-Host "[+] Registry updated: $path" -ForegroundColor Green
 }
 
-# 2. Убиваме задачата за рестарт на системно ниво
+# 2. We kill the restart task at the system level
 $rebootTaskPath = "\Microsoft\Windows\UpdateOrchestrator\Reboot"
 try {
     Disable-ScheduledTask -TaskName "Reboot" -TaskPath "\Microsoft\Windows\UpdateOrchestrator\" -ErrorAction SilentlyContinue
@@ -29,7 +29,7 @@ try {
     Write-Host "[-] Could not disable task, might be already locked." -ForegroundColor Yellow
 }
 
-# 3. Заключваме файла на задачата (Permissions Hack)
+# 3. Locking the task file (Permissions Hack)
 # Това пречи на Windows сам да си пусне задачата обратно
 $taskFile = "$env:windir\System32\Tasks\Microsoft\Windows\UpdateOrchestrator\Reboot"
 if (Test-Path $taskFile) {
@@ -39,7 +39,7 @@ if (Test-Path $taskFile) {
     Write-Host "[+] Task file LOCKED. Windows cannot read it anymore!" -ForegroundColor Green
 }
 
-# 4. Обновяване на политиките веднага
+# 4. Update policies immediately
 gpupdate /force | Out-Null
 
 Write-Host "==========================================================" -ForegroundColor Cyan
@@ -47,7 +47,7 @@ Write-Host "SUCCESS! Windows will now ASK for your permission." -ForegroundColor
 Write-Host "Your session is safe. Continue training v4 Evolution!" -ForegroundColor Cyan
 Write-Host "==========================================================" -ForegroundColor Cyan
 
-# --- ДОБАВЕНА ПРОВЕРКА ОТ nu11secur1tyAI ---
+# --- ADDED CHECK BY nu11secur1ty ---
 Write-Host "`n[!] FINAL VERIFICATION STATUS:" -ForegroundColor Yellow
 $verify = Get-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -ErrorAction SilentlyContinue
 if ($verify.NoAutoRebootWithLoggedOnUsers -eq 1) { 

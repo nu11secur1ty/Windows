@@ -5,7 +5,7 @@
 
 Write-Host "Restoring Micky Mouse default settings..." -ForegroundColor Yellow
 
-# 1. Изчистване на регистрите (Премахваме нашите забрани)
+# 1. Clearing the registers (We remove our bans)
 $regPaths = @(
     "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU",
     "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update"
@@ -19,7 +19,7 @@ foreach ($path in $regPaths) {
     }
 }
 
-# 2. Отключване на файла на задачата (Връщане на правата)
+# 2. Unlocking the task file (Returning rights)
 # Това е критично, за да може Windows изобщо да "види" задачата отново
 $taskFile = "$env:windir\System32\Tasks\Microsoft\Windows\UpdateOrchestrator\Reboot"
 if (Test-Path $taskFile) {
@@ -29,7 +29,7 @@ if (Test-Path $taskFile) {
     Write-Host "[+] File System: Permissions reset for Reboot task file." -ForegroundColor Green
 }
 
-# 3. Връщане на задачите в Task Scheduler
+# 3. Returning tasks to Task Scheduler
 $tasks = @(
     "\Microsoft\Windows\UpdateOrchestrator\Reboot",
     "\Microsoft\Windows\UpdateOrchestrator\Reboot_AC",
@@ -45,14 +45,14 @@ foreach ($taskPath in $tasks) {
     }
 }
 
-# 4. Форсиране на политиките
+# 4. Enforcing policies
 gpupdate /force | Out-Null
 
 Write-Host "==========================================================" -ForegroundColor Yellow
 Write-Host "RESTORE COMPLETE! Windows is back to default behavior." -ForegroundColor White
 Write-Host "==========================================================" -ForegroundColor Yellow
 
-# --- ПРОВЕРКА НА СТАТУСА ---
+# --- CHECK STATUS ---
 Write-Host "[!] FINAL VERIFICATION:" -ForegroundColor Cyan
 $verify = Get-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -ErrorAction SilentlyContinue
 if ($null -eq $verify.NoAutoRebootWithLoggedOnUsers) {
